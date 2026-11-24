@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerak dalam Kehidupan Sehari-hari | IPA Kelas 7</title>
+<style>
+:root{--bg:#071426;--panel:#10243d;--panel2:#15304d;--cyan:#54d6e8;--blue:#6aa8ff;--yellow:#ffd166;--white:#f4f8ff;--muted:#b7c8dc;--green:#72e0b1;--red:#ff8585}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,Segoe UI,Arial,sans-serif;overflow:hidden}
+.deck{height:100vh;display:flex;flex-direction:column;background:radial-gradient(circle at 80% 15%,#15365a 0,transparent 32%),linear-gradient(135deg,#071426,#0b1d34)}
+.top{height:8px;background:#1b3552;flex:none}.progress{height:8px;background:linear-gradient(90deg,var(--cyan),var(--blue));width:0;transition:width .3s}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:3vh 5vw;min-height:0}
+.slide{display:none;width:min(1100px,100%);max-height:100%;animation:enter .45s ease both;overflow:auto;padding:1rem .5rem}
+.slide.active{display:block}@keyframes enter{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(2.5rem,6vw,5.2rem);line-height:1.04;margin:.2em 0;color:white;letter-spacing:-.04em}
+h2{font-size:clamp(1.8rem,4vw,3.1rem);margin:.1em 0 .55em;line-height:1.1}
+h3{color:var(--cyan);margin:.2em 0 .5em;font-size:1.25rem}
+p,li{font-size:clamp(1rem,1.8vw,1.3rem);line-height:1.5;color:var(--muted)}
+strong{color:white}.eyebrow{color:var(--cyan);font-weight:800;letter-spacing:.15em;text-transform:uppercase;font-size:.82rem;margin-bottom:1rem}
+.sub{font-size:clamp(1.1rem,2vw,1.5rem);max-width:800px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:1.2rem}
+.card{background:linear-gradient(145deg,var(--panel),#0c1c31);border:1px solid #284563;border-radius:20px;padding:1.15rem;box-shadow:0 12px 35px #0003}
+.card p{margin:.35rem 0}.big{font-size:clamp(2rem,5vw,4rem);font-weight:900;color:var(--yellow)}
+.pill{display:inline-block;padding:.35rem .7rem;border-radius:999px;background:#153c55;color:var(--cyan);font-weight:700;font-size:.85rem}
+.visual{height:220px;border-radius:20px;background:linear-gradient(135deg,#102d4a,#0b1b2f);border:1px solid #294967;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;margin:1rem 0}
+.road{position:absolute;left:0;right:0;bottom:42px;height:58px;background:#263d54;border-top:4px solid #9bb2c7;border-bottom:4px solid #9bb2c7}
+.dash{position:absolute;bottom:67px;left:0;width:200%;border-top:4px dashed #f7d778;animation:road 3s linear infinite}
+@keyframes road{to{transform:translateX(-50%)}}
+.person{font-size:4rem;position:absolute;bottom:87px;left:15%;animation:walk 2s ease-in-out infinite alternate}
+@keyframes walk{to{left:72%;transform:rotate(5deg)}}
+.car{font-size:4rem;position:absolute;bottom:78px;left:-15%;animation:drive 5s linear infinite}
+@keyframes drive{to{left:110%}}
+.orbit{width:150px;height:150px;border:3px dashed var(--cyan);border-radius:50%;position:relative;animation:spin 5s linear infinite}
+.orbit span{position:absolute;top:-22px;left:58px;font-size:2.5rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.wave{width:80%;height:100px;background:repeating-radial-gradient(ellipse at left,transparent 0 10px,#54d6e8 11px 13px,transparent 14px 24px);opacity:.7;animation:pulse 1.8s ease-in-out infinite alternate}
+@keyframes pulse{to{transform:scaleX(.75);opacity:.35}}
+.route{display:flex;align-items:center;justify-content:space-around;gap:10px;flex-wrap:wrap;margin:1.2rem 0}
+.point{background:#173654;border:2px solid var(--cyan);border-radius:50%;width:58px;height:58px;display:grid;place-items:center;font-weight:900;color:white}
+.arrow{font-size:2rem;color:var(--yellow)}
+.formula{font-size:clamp(1.5rem,3vw,2.4rem);font-weight:800;color:var(--yellow);text-align:center;padding:1rem;background:#172d45;border-radius:16px;margin:1rem 0}
+.note{border-left:4px solid var(--yellow);padding:.7rem 1rem;background:#172a41;border-radius:0 12px 12px 0;color:var(--muted);font-size:1.05rem}
+ul{padding-left:1.3em}.answer{display:none;margin-top:1rem;padding:1rem;border-radius:14px;background:#123a35;border:1px solid #347b69;color:#c9ffeb;font-size:1.1rem}
+.answer.show{display:block}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:1rem}
+button{border:0;border-radius:12px;padding:.85rem 1rem;font-size:1rem;font-weight:800;cursor:pointer}
+.choice{background:#193653;color:white;border:1px solid #355a7b;text-align:left}.choice:hover{background:#245078}
+.choice.correct{background:#15523e;border-color:var(--green)}.choice.wrong{background:#5a2933;border-color:var(--red)}
+.controls{display:flex;align-items:center;justify-content:space-between;padding:12px 4vw 18px;gap:12px}
+.controls button{background:#173653;color:white;border:1px solid #365b7c;min-width:112px}.controls button.primary{background:var(--cyan);color:#062033;border:0}
+#count{color:var(--muted);font-weight:700}.footer{color:#7891aa;font-size:.8rem}
+.center{text-align:center}.center .sub{margin:auto}.icon{font-size:4rem}.small{font-size:.95rem}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:1rem}td,th{border:1px solid #36516d;padding:.7rem;text-align:left}th{background:#173653;color:var(--cyan)}td{color:var(--muted)}
+@media(max-width:700px){main{padding:2vh 5vw}.grid,.choices{grid-template-columns:1fr}.visual{height:165px}.controls button{min-width:auto;padding:.7rem}.slide{padding:.5rem 0}.person,.car{font-size:3rem}}
+</style>
+</head>
+<body>
+<div class="deck">
+ <div class="top"><div class="progress" id="progress"></div></div>
+ <main id="slides">
+  <section class="slide active center">
+   <div class="eyebrow">IPA • Kelas 7</div>
+   <h1>GERAK DALAM<br><span style="color:var(--cyan)">KEHIDUPAN</span><br>SEHARI-HARI</h1>
+   <p class="sub">Mengamati perubahan posisi, menelusuri lintasan, dan memahami seberapa cepat benda bergerak.</p>
+   <div class="visual"><div class="road"></div><div class="dash"></div><div class="person">🚴</div><div class="car">🚗</div></div>
+   <span class="pill">Ayo amati • pikirkan • buktikan!</span>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">01 • Tujuan pembelajaran</div><h2>Hari ini kita akan belajar...</h2>
+   <div class="grid">
+    <div class="card"><h3>Memahami gerak</h3><p>Menjelaskan pengertian gerak melalui peristiwa sehari-hari.</p></div>
+    <div class="card"><h3>Mengenali macam gerak</h3><p>Membandingkan gerak berdasarkan jenis, sifat, dan lintasannya.</p></div>
+    <div class="card"><h3>Menggunakan titik acuan</h3><p>Membedakan gerak nyata dan gerak relatif.</p></div>
+    <div class="card"><h3>Menghitung gerak</h3><p>Membedakan jarak, perpindahan, kelajuan, dan kecepatan.</p></div>
+   </div>
+  </section>
+
+  <section class="slide center">
+   <div class="eyebrow">02 • Pertanyaan pemantik</div><h2>Apakah penumpang bus bergerak?</h2>
+   <div class="visual"><div style="font-size:5rem;z-index:2">🚌</div><div style="position:absolute;bottom:12px;left:10%;font-size:2.3rem">🌳　🌳　🌳</div><div style="position:absolute;top:20px;right:12%;font-size:2rem">☁️</div></div>
+   <div class="grid"><div class="card"><h3>Terhadap kursi bus?</h3><p>Penumpang yang duduk tampak...</p></div><div class="card"><h3>Terhadap pohon?</h3><p>Posisi penumpang berubah...</p></div></div>
+   <p class="note">Diskusikan dengan teman: mengapa jawaban untuk kedua pertanyaan itu bisa berbeda?</p>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">03 • Konsep dasar</div><h2>Apa yang dimaksud dengan gerak?</h2>
+   <p>Gerak adalah <strong>perubahan posisi suatu benda terhadap titik acuan dalam selang waktu tertentu.</strong></p>
+   <div class="visual"><div class="route"><div><div class="point">A</div><p class="small">Posisi awal</p></div><div class="arrow">➜ ➜ ➜</div><div><div class="point">B</div><p class="small">Posisi akhir</p></div></div><div style="position:absolute;bottom:10px;color:var(--muted)">Animasi: benda berpindah dari A menuju B</div></div>
+   <div class="note">Kunci: saat membahas gerak, kita perlu menentukan <strong>titik acuan</strong> sebagai pembanding.</div>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">04 • Titik acuan</div><h2>Gerak harus dibandingkan dengan acuan</h2>
+   <div class="grid">
+    <div class="card center"><div class="icon">🧍</div><h3>Murid berdiri</h3><p>Diam terhadap lantai kelas.</p></div>
+    <div class="card center"><div class="icon">🌍</div><h3>Bumi berotasi</h3><p>Bergerak terhadap sumbu rotasinya.</p></div>
+   </div>
+   <p class="note">Satu benda dapat tampak diam terhadap satu acuan, tetapi bergerak terhadap acuan lain.</p>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">05 • Berdasarkan jenis gerak</div><h2>Tiga contoh gerak</h2>
+   <div class="grid">
+    <div class="card center"><div class="icon">🚗</div><h3>Translasi</h3><p>Benda berpindah tempat. Contoh: mobil melaju di jalan.</p></div>
+    <div class="card center"><div class="icon"><span class="orbit"><span>🌀</span></span></div><h3>Rotasi</h3><p>Benda berputar pada porosnya. Contoh: kipas angin.</p></div>
+    <div class="card center"><div class="icon">🎸</div><h3>Getaran</h3><p>Gerak bolak-balik di sekitar titik keseimbangan. Contoh: senar gitar.</p></div>
+    <div class="card center"><div class="icon">🛝</div><h3>Amati!</h3><p>Gerakan ayunan juga dapat menjadi contoh gerak bolak-balik.</p></div>
+   </div>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">06 • Berdasarkan lintasan</div><h2>Bagaimana jalur geraknya?</h2>
+   <div class="grid">
+    <div class="card"><h3>Gerak lurus</h3><p>Lintasannya berupa garis lurus.</p><div class="route"><span class="point">A</span><span class="arrow">━━━━━━➜</span><span class="point">B</span></div></div>
+    <div class="card"><h3>Gerak melingkar</h3><p>Lintasannya membentuk lingkaran.</p><div class="center"><div class="orbit"><span>🚴</span></div></div></div>
+    <div class="card"><h3>Gerak parabola</h3><p>Lintasannya melengkung seperti lengkungan bola yang dilempar.</p><div class="center" style="font-size:3rem">⚽　⌒</div></div>
+    <div class="card"><h3>Ingat!</h3><p>Lintasan adalah jalur yang dilalui benda selama bergerak.</p></div>
+   </div>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">07 • Berdasarkan sifatnya</div><h2>Gerak dapat tampak berbeda</h2>
+   <div class="grid">
+    <div class="card"><h3>Gerak nyata</h3><p>Posisi benda benar-benar berubah terhadap acuan yang digunakan.</p><p class="big">🚶 →</p><p>Contoh: murid berjalan dari pintu ke papan tulis.</p></div>
+    <div class="card"><h3>Gerak relatif</h3><p>Gerak atau diam bergantung pada pengamat dan titik acuannya.</p><p class="big">🚌 🌳</p><p>Contoh: penumpang diam terhadap bus, tetapi bergerak terhadap pohon di tepi jalan.</p></div>
+   </div>
+   <p class="note">Gerak relatif bukan berarti geraknya palsu. Kita sedang membandingkan posisi terhadap acuan yang berbeda.</p>
+  </section>
+
+  <section class="slide center">
+   <div class="eyebrow">08 • Cek pemahaman</div><h2>Menurutmu, gerak apakah ini?</h2>
+   <div class="visual"><div class="car">🚗</div><div class="road"></div><div class="dash"></div></div>
+   <p>Sebuah mobil melaju di jalan yang lurus. Berdasarkan lintasannya, mobil mengalami...</p>
+   <div class="choices" data-answer="Gerak lurus"><button class="choice">Gerak melingkar</button><button class="choice">Gerak lurus</button><button class="choice">Gerak getaran</button><button class="choice">Gerak rotasi saja</button></div>
+   <div class="answer">Benar! Lintasan mobil pada contoh ini berupa garis lurus.</div>
+  </section>
+
+  <section class="slide center">
+   <div class="eyebrow">09 • Jarak dan perpindahan</div><h2>Apakah panjang jalan sama dengan perubahan posisi?</h2>
+   <div class="visual"><div style="font-size:2rem">🏠</div><div style="font-size:2rem">〰️〰️〰️〰️</div><div style="font-size:2rem">🏫</div></div>
+   <p>Bayangkan kamu berjalan dari rumah ke sekolah melalui jalan yang berbelok.</p>
+   <p class="sub">Kita akan membedakan <strong>seluruh lintasan</strong> dan <strong>garis dari titik awal ke titik akhir</strong>.</p>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">10 • Jarak</div><h2>Jarak: seluruh lintasan yang ditempuh</h2>
+   <p>Jarak adalah <strong>panjang seluruh lintasan</strong> yang dilalui benda.</p>
+   <ul><li>Tidak memperhatikan arah.</li><li>Termasuk besaran skalar.</li><li>Satuannya dapat berupa meter (m) atau kilometer (km).</li></ul>
+   <div class="visual"><div style="font-size:1.3rem;color:var(--yellow);font-weight:900">A</div><div style="font-size:3rem;color:var(--cyan)">〰️〰️〰️〰️〰️➜</div><div style="font-size:1.3rem;color:var(--yellow);font-weight:900">B</div></div>
+   <p class="note">Bayangkan kamu mengikuti jalan berkelok. Semua bagian jalan yang kamu lalui dijumlahkan.</p>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">11 • Perpindahan</div><h2>Perpindahan: dari awal ke akhir</h2>
+   <p>Perpindahan adalah <strong>perubahan posisi dari titik awal ke titik akhir</strong>, disertai arah.</p>
+   <ul><li>Memiliki besar dan arah.</li><li>Termasuk besaran vektor.</li><li>Ditentukan oleh posisi awal dan posisi akhir.</li></ul>
+   <div class="visual"><div class="route"><div class="point">A</div><div style="font-size:3rem;color:var(--yellow)">━━━━━━➜</div><div class="point">B</div></div></div>
+   <p class="note">Jika kembali ke titik awal, perpindahan totalnya nol, walaupun jarak tempuhnya tidak nol.</p>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">12 • Bandingkan</div><h2>Jarak ≠ perpindahan</h2>
+   <table><tr><th>Jarak</th><th>Perpindahan</th></tr><tr><td>Panjang seluruh lintasan</td><td>Perubahan posisi awal ke akhir</td></tr><tr><td>Tidak memiliki arah</td><td>Memiliki arah</td></tr><tr><td>Besaran skalar</td><td>Besaran vektor</td></tr><tr><td>Bergantung pada lintasan</td><td>Bergantung pada posisi awal dan akhir</td></tr></table>
+   <div class="note">Ingat kata kunci: <strong>jarak = jalan yang dilalui</strong>; <strong>perpindahan = perubahan posisi</strong>.</div>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">13 • Contoh soal</div><h2>Berjalan ke timur, lalu kembali</h2>
+   <p>Dina berjalan 5 meter ke arah timur, kemudian berbalik dan berjalan 3 meter ke arah barat.</p>
+   <div class="visual"><div style="display:flex;align-items:center;gap:10px"><span class="point">A</span><span style="font-size:2rem;color:var(--cyan)">━━━━ 5 m ➜</span><span class="point">B</span><span style="font-size:2rem;color:var(--yellow)">➜ 3 m</span><span class="point">C</span></div></div>
+   <p><strong>Pertanyaan:</strong> Berapa jarak dan perpindahan Dina?</p>
+   <button class="primary" onclick="reveal('ans13')">Lihat pembahasan</button>
+   <div class="answer" id="ans13"><strong>Jarak:</strong> 5 + 3 = 8 meter.<br><strong>Perpindahan:</strong> 5 − 3 = 2 meter ke arah timur.<br>Posisi akhir Dina berada 2 meter di sebelah timur posisi awal.</div>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">14 • Tantangan konsep</div><h2>Satu putaran penuh</h2>
+   <div class="visual center"><div class="orbit"><span>🏃</span></div></div>
+   <p>Seorang murid berlari satu putaran penuh pada lintasan berbentuk lingkaran dan kembali ke titik awal.</p>
+   <div class="choices" data-answer="Jarak tidak nol, perpindahan nol"><button class="choice">Jarak nol, perpindahan nol</button><button class="choice">Jarak tidak nol, perpindahan nol</button><button class="choice">Jarak nol, perpindahan tidak nol</button><button class="choice">Jarak dan perpindahan sama</button></div>
+   <div class="answer">Tepat! Murid menempuh lintasan, sehingga jaraknya tidak nol. Namun, posisi akhir sama dengan posisi awal, sehingga perpindahannya nol.</div>
+  </section>
+
+  <section class="slide center">
+   <div class="eyebrow">15 • Kelajuan dan kecepatan</div><h2>Seberapa cepat benda bergerak?</h2>
+   <div class="visual"><div class="person">🏃</div><div class="road"></div><div class="dash"></div></div>
+   <p>Dua murid dapat menempuh jarak yang sama, tetapi membutuhkan waktu berbeda.</p>
+   <p class="sub">Untuk membandingkannya, kita mempelajari <strong>kelajuan</strong> dan <strong>kecepatan</strong>.</p>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">16 • Kelajuan</div><h2>Kelajuan: jarak tiap satuan waktu</h2>
+   <p>Kelajuan menyatakan seberapa jauh benda bergerak dalam waktu tertentu.</p>
+   <div class="formula">Kelajuan = Jarak ÷ Waktu</div>
+   <div class="grid"><div class="card"><h3>Besaran skalar</h3><p>Tidak memperhatikan arah.</p></div><div class="card"><h3>Satuan</h3><p>Meter per sekon (m/s) atau kilometer per jam (km/jam).</p></div></div>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">17 • Contoh kelajuan</div><h2>Hitung kelajuan bersepeda</h2>
+   <p>Raka bersepeda menempuh jarak 120 meter selama 20 sekon. Berapa kelajuannya?</p>
+   <div class="formula">Kelajuan = 120 m ÷ 20 s</div>
+   <button class="primary" onclick="reveal('ans17')">Tampilkan jawaban</button>
+   <div class="answer" id="ans17">Kelajuan = <strong>6 m/s</strong>.<br>Artinya, rata-rata Raka menempuh jarak 6 meter setiap sekon.</div>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">18 • Kecepatan</div><h2>Kecepatan: perpindahan tiap satuan waktu</h2>
+   <p>Kecepatan menyatakan perubahan posisi benda setiap satuan waktu dengan memperhatikan arah.</p>
+   <div class="formula">Kecepatan rata-rata = Perpindahan ÷ Waktu</div>
+   <div class="grid"><div class="card"><h3>Besaran vektor</h3><p>Memiliki besar dan arah.</p></div><div class="card"><h3>Contoh</h3><p>5 m/s ke arah timur.</p></div></div>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">19 • Contoh kecepatan</div><h2>Hitung kecepatan rata-rata</h2>
+   <p>Beni berpindah 100 meter ke arah timur selama 20 sekon. Berapa kecepatan rata-ratanya?</p>
+   <div class="formula">Kecepatan = 100 m ÷ 20 s</div>
+   <button class="primary" onclick="reveal('ans19')">Tampilkan jawaban</button>
+   <div class="answer" id="ans19">Kecepatan rata-rata = <strong>5 m/s ke arah timur</strong>.</div>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">20 • Bandingkan</div><h2>Kelajuan dan kecepatan</h2>
+   <table><tr><th>Kelajuan</th><th>Kecepatan</th></tr><tr><td>Jarak dibagi waktu</td><td>Perpindahan dibagi waktu</td></tr><tr><td>Skalar</td><td>Vektor</td></tr><tr><td>Tidak memiliki arah</td><td>Memiliki arah</td></tr><tr><td>Contoh: 4 m/s</td><td>Contoh: 4 m/s ke utara</td></tr></table>
+   <p class="note">Untuk gerak yang kembali ke titik awal, perpindahan total nol. Karena itu, kecepatan rata-ratanya nol, meskipun kelajuan rata-ratanya tidak nol.</p>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">21 • Kuis 1</div><h2>Kenali jenis geraknya</h2>
+   <p>Jarum jam bergerak mengelilingi pusat jam. Berdasarkan lintasannya, gerak ujung jarum jam adalah...</p>
+   <div class="choices" data-answer="Gerak melingkar"><button class="choice">Gerak lurus</button><button class="choice">Gerak melingkar</button><button class="choice">Gerak parabola</button><button class="choice">Gerak getaran</button></div>
+   <div class="answer">Benar! Ujung jarum jam bergerak mengikuti lintasan berbentuk lingkaran.</div>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">22 • Kuis 2</div><h2>Hitung jarak dan perpindahan</h2>
+   <p>Adi berjalan 7 meter ke utara, kemudian 2 meter ke selatan. Berapakah jarak dan perpindahannya?</p>
+   <div class="choices" data-answer="Jarak 9 m; perpindahan 5 m ke utara"><button class="choice">Jarak 5 m; perpindahan 9 m</button><button class="choice">Jarak 9 m; perpindahan 5 m ke utara</button><button class="choice">Jarak 9 m; perpindahan 5 m ke selatan</button><button class="choice">Jarak 7 m; perpindahan 2 m</button></div>
+   <div class="answer">Tepat! Jarak = 7 + 2 = 9 m. Perpindahan = 7 − 2 = 5 m ke utara.</div>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">23 • Kuis 3</div><h2>Hitung kelajuan</h2>
+   <p>Sebuah sepeda menempuh jarak 90 meter dalam waktu 15 sekon. Berapakah kelajuannya?</p>
+   <div class="choices" data-answer="6 m/s"><button class="choice">5 m/s</button><button class="choice">6 m/s</button><button class="choice">15 m/s</button><button class="choice">75 m/s</button></div>
+   <div class="answer">Benar! Kelajuan = 90 ÷ 15 = 6 m/s.</div>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">24 • Kuis 4</div><h2>Kelajuan atau kecepatan?</h2>
+   <p>Pernyataan manakah yang menunjukkan kecepatan?</p>
+   <div class="choices" data-answer="3 m/s ke arah barat"><button class="choice">3 m/s</button><button class="choice">Jarak 30 meter</button><button class="choice">3 m/s ke arah barat</button><button class="choice">Waktu 10 sekon</button></div>
+   <div class="answer">Tepat! Kecepatan menyatakan besar gerak dan arahnya.</div>
+  </section>
+
+  <section class="slide">
+   <div class="eyebrow">25 • Kesimpulan</div><h2>Apa yang sudah kita pelajari?</h2>
+   <div class="grid">
+    <div class="card"><h3>Gerak</h3><p>Perubahan posisi terhadap titik acuan dalam selang waktu.</p></div>
+    <div class="card"><h3>Jarak</h3><p>Panjang seluruh lintasan yang ditempuh.</p></div>
+    <div class="card"><h3>Perpindahan</h3><p>Perubahan posisi dari awal ke akhir beserta arah.</p></div>
+    <div class="card"><h3>Kelajuan & kecepatan</h3><p>Jarak/waktu dan perpindahan/waktu.</p></div>
+   </div>
+  </section>
+
+  <section class="slide center">
+   <div class="eyebrow">26 • Refleksi</div><h2>Sebelum kita akhiri...</h2>
+   <div class="card" style="max-width:760px;margin:1rem auto;text-align:left">
+    <p>1. Hal baru apa yang kamu pahami hari ini?</p>
+    <p>2. Apa perbedaan jarak dan perpindahan?</p>
+    <p>3. Dalam situasi apa kamu menggunakan konsep kelajuan?</p>
+    <p>4. Bagian mana yang masih ingin kamu pelajari lagi?</p>
+   </div>
+   <h3>Terus amati gerak di sekitarmu!</h3>
+  </section>
+ </main>
+ <div class="controls">
+  <button id="home">⌂ Awal</button><button id="prev">← Sebelumnya</button>
+  <span id="count">1 / 26</span>
+  <button id="next" class="primary">Selanjutnya →</button><button id="full">⛶</button>
+ </div>
+</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let index=0;
+const progress=document.getElementById('progress'),count=document.getElementById('count');
+function show(n){index=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===index));count.textContent=(index+1)+' / '+slides.length;progress.style.width=((index+1)/slides.length*100)+'%';document.getElementById('prev').disabled=index===0;document.getElementById('next').textContent=index===slides.length-1?'Selesai ✓':'Selanjutnya →';}
+document.getElementById('next').onclick=()=>show(index+1);document.getElementById('prev').onclick=()=>show(index-1);document.getElementById('home').onclick=()=>show(0);
+document.getElementById('full').onclick=()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()};
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')show(index+1);if(e.key==='ArrowLeft')show(index-1);});
+function reveal(id){document.getElementById(id).classList.toggle('show')}
+document.querySelectorAll('.choices').forEach(group=>{group.querySelectorAll('.choice').forEach(btn=>btn.addEventListener('click',()=>{group.querySelectorAll('.choice').forEach(b=>b.classList.remove('correct','wrong'));const ok=btn.textContent.trim()===group.dataset.answer;btn.classList.add(ok?'correct':'wrong');const ans=group.nextElementSibling;if(ans&&ans.classList.contains('answer'))ans.classList.add('show');}))});
+show(0);
+</script>
+</body>
+</html>
